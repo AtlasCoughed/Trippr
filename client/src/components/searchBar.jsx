@@ -21,13 +21,23 @@ class SearchBar extends Component {
 
   submitData() {
     this.props.infoStore(this.state);
-    this.setState({ endLocation: '',
+    this.setState({ endLocation: setEndLocation(),
                    startLocation: '',
                    numSeats: '',
                    seatPrice: '',
                    startDate: '',
                    endDate: ''
                  });
+  }
+
+  setEndLocation(){
+    var wholeURL = (document.location.href);
+    var endLocation = (wholeURL.pathname).split("").filter(function(curr){
+      if(curr !== "/" || curr !== "+"){
+        return curr
+      }
+    })
+    console.log("url parsed", endLocation);
   }
 
   render() {
