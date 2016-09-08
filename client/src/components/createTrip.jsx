@@ -24,7 +24,7 @@ class CreateTrip extends Component {
                    };
     this.submitTrip = this.submitTrip.bind(this);
   }
-
+  
   handleChange(name, e) {
     let change = {};
     change[name] = e.target.value;
@@ -71,11 +71,19 @@ class CreateTrip extends Component {
     return (
       <div className="container">
         <NavBar />
+				<div id="locationField">
+      		<input id="autocomplete" placeholder="Enter your address"
+             onFocus="geolocate()" type="text"></input>
+    		</div>
         <form className="form-group" onSubmit={this.submitTrip}>
           <h1>Create Your Trip</h1>
           <div className="col-md-6" id="CreateAndSearchTripsLeft">
-                <input
+								<label for="startAddress">Start Address</label>
+								<input
+                class="lable_Start"
                 placeholder = "Start street"
+                id="street_number_start"
+                disabled="true"
                 className="form-control"
                 value = {this.state.startSt}
                 onChange = {this.handleChange.bind(this, 'startSt')} />
@@ -91,6 +99,8 @@ class CreateTrip extends Component {
                 className="form-control"
                 value = {this.state.startState}
                 onChange = {this.handleChange.bind(this, 'startState')} />
+
+
 
               <input
                 type = 'date'
@@ -119,6 +129,8 @@ class CreateTrip extends Component {
             </div>
 
             <div className="col-md-6" id="CreateAndSearchTripsRight">
+							<label for="endAddress">End Address</label>
+
               <input
                 placeholder = "End street"
                 className="form-control"
@@ -137,6 +149,7 @@ class CreateTrip extends Component {
                 value = {this.state.endState}
                 onChange = {this.handleChange.bind(this, 'endState')} />
 
+              <label for="tripDetails">Trip Details</label>
               <input
                 type = 'number'
                 className="form-control"

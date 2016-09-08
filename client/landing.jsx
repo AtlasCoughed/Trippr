@@ -16,12 +16,12 @@ class Landing extends Component {
     super(props);
     this.state = { endLocation: '' };
     this.submitData = this.submitData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(name, e) {
-    let change = {};
-    change[name] = e.target.value;
-    this.setState(change);
+  handleChange(value) {
+    console.log('current input val', value);
+    this.setState( {endLocation: value} );
   }
 
   submitData(e) {
@@ -30,23 +30,8 @@ class Landing extends Component {
     browserHistory.push(link);
   }
 
-  onSuggestSelect(suggest) {
-    console.log(suggest);
-  }
-  onFocus() {
-    console.log('onFocus'); 
-  }
-  onBlur(value) {
-    console.log('onBlur', value); 
-  }
-    
+
   render() {
-    var fixtures = [
-      {label: 'New York', location: {lat: 40.7033127, lng: -73.979681}},
-      {label: 'Las Vegas', location: {lat: 36.1699, lng: 115.1398}},
-      {label: 'San Francisco', location: {lat: 37.7749, lng: 122.4194}}
-    ];
-    
     return (
       <div id="landingBody">
         <img id="landingLogo" src="trpperLogo-small.png"></img>
@@ -54,19 +39,19 @@ class Landing extends Component {
           <div className="container">
             <h1> Where are you going? </h1>
               <form onSubmit={this.submitData}>
-              <Geosuggest 
+
+                <Geosuggest 
                 type="text"
                 name="search"
                 className="form-control"
                 placeholder = "Enter a city name"
-                fixtures={fixtures}
                 onSuggestSelect={this.onSuggestSelect}
                 value = {this.state.endLocation}
-                onChange = {this.handleChange.bind(this, 'endLocation')} 
+                onChange = {this.handleChange} 
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-                onChange={this.onChange}
               />
+
               </form>
           </div>
         </div>
